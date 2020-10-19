@@ -1,15 +1,17 @@
 class Fish:
-    def __init__(self,types,scale,fins,gills,tooth):
+    evol_count = 0
+    def __init__(self,types,scale,fins,gills,tooth,):
         self.types = types
         self.scale = scale
         self.fins = fins
         self.gills = gills
         self.tooth = tooth
-        self. energy = 100
+        self. energy = 40
+        Fish.evol_count +=1
 
-    def type(self):
+
+    def show_type(self):
         return f'{self.types} {self.scale} {self.fins} {self.gills} {self.tooth}'
-
 
     def die(self,food):
         if food > 0:
@@ -40,24 +42,34 @@ class White_Shark(Fish):
         self.terrible = True
         self.sharp_tooth = True
         self.very_hungry = True
-        self.energy = 100
+        self.energy = 50
+
+        self.fly = True
 
     def swim(self,km):
         res = km // 10
         self.energy -= res
-        return res
-
+        if self.energy > 0:
+            return print(f'акула прошла дистанцию')
+        else:
+            return print(f'у вас недастаточно энергии  ')
 
     def eat(self,food):
         if food == 'fish':
             self.energy = self.energy + 20
-            print(self.energy)
+            return print(f'энергия восполнилась на {self.energy} %')
         elif food == 'tiger_shark':
             self.energy = self.energy + 50
-            print(self.energy)
+            return print(f'энергия восполнилась на {self.energy} %')
         elif food == 'human':
             self.energy = self.energy + 100
-            print(self.energy)
+            return print(f'энергия восполнилась на {self.energy} %')
+
+    def Fly(self,shark):
+        if shark >= self.energy:
+            print('Вы можете летать')
+        else:
+            print('У вас не зватает энергии')
 
 class Blue_Whale(Fish):
     def __init__(self,types, scale, fins, gills, tooth):
@@ -67,9 +79,9 @@ class Blue_Whale(Fish):
         self.blowhole = True
         self.whalebone = True
         self.hungry = True
-        self.energy = 100
+        self.energy = 70
 
-    def type(self):
+    def show_type(self):
         return f'{self.types} {self.scale} {self.fins} {self.gills} {self.tooth}'
 
     def growth(self,food):
@@ -83,16 +95,22 @@ class Blue_Whale(Fish):
             self.size = self.size + 3
             print(self.size)
 
+    def evolution(self,whale):
+        if whale > 1000:
+            print('спустя 1000 лет  эволюций киты научились дышать под водой')
+        else:
+            print('еще не эволюционировал')
+
 shark = White_Shark('Белая акула','Кожа','Плавники','Жабры','Острые зубы')
-print(shark.type())
+print(shark.show_type())
 shark.swim(100)
-shark.eat('fish')
-shark.energy = 100
 
 whale = Blue_Whale ('Синий кит','Кожа','Плавники','Легкие','Китовый ус')
-print(whale.type())
+print(whale.show_type())
 whale.growth('shark')
 whale.size = 25
+whale.evolution(1200)
+
 
 Whale = Fight()
 Shark = Fight()
